@@ -1,7 +1,7 @@
 $(function(){
-	
+	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	var $alunos = $("#alunos");
-	var $name = $("#name");
+	var $nome = $("#nome");
 	var $email = $("#email");
 	var $curso = $("#curso");
 
@@ -9,7 +9,7 @@ $(function(){
 		 "<li class='list-group-item'>"+
 					"<div class='row'>"+
 						"<div class='col'>"+
-							"{{name}}"+
+							"{{nome}}"+
 						"</div>"+
 						"<div class='col'>"+
 							"{{email}}"+
@@ -36,16 +36,29 @@ $(function(){
 	});
 	$(document).on('click', '.editor', function(){
 		$('#editModal').modal('toggle');
-		//$('#editName').val("")
+		//$('#editnome').val("")
 	});
 	
 	$("#adiciona").on('click', function(){
 		event.preventDefault();
-		if ($name.valid() && $email.valid() && $curso.valid()){
+		if ($nome.valid() && $email.valid() && $curso.valid()){
 
-		var aluno = {name:$name.val(), email:$email.val() ,curso:$curso.val()};
+		var aluno = {nome:$nome.val(), email:$email.val() ,curso:$curso.val()};
 		
 		addAluno(aluno);
+
+		$.ajax({
+			headers: {
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+			type:'POST',
+			url: "/alunos",
+			data: aluno,// {_token: CSRF_TOKEN, message: aluno},
+			dataType: 'JSON',
+			succes: function(newAluno){
+				alert(newAluno);
+			}
+		});
 		}
 	});
 

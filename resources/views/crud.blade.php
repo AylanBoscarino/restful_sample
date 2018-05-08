@@ -3,7 +3,7 @@
 <head>
 	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">-->
 	<link rel="stylesheet" href="{{asset('css/app.css')}}">
-	
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<meta charset="utf-8">
 	<title> php Restful API</title>
 </head>
@@ -38,23 +38,9 @@
 						</div>
 					</div>
 					@foreach($alunos as $aluno)
-						<li class="list-group-item">
-							<div class="row">
-								<div class="col">
-									{{$aluno->nome}}
-								</div>
-								<div class="col">
-									{{$aluno->email}}
-								</div>
-								<div class="col">
-									{{$aluno->curso}}
-								</div>
-								<div class="col">
-									<button type="button" class="btn btn-warning editor" title="editar"l">E</button>
-									<button class="btn btn-danger removedor" title="deletar">X</button>
-								</div>
-							</div>
-						</li>
+						@component('components.list_item', ['aluno' => $aluno])
+
+						@endcomponent
 
 					@endforeach
 				</li>
@@ -69,7 +55,7 @@
 			<div class="input-goup-prepend">
 				<span class="input-group-text"  >Nome</span>
 			</div>
-			<input type="text" class="form-control" required aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="name">
+			<input type="text" class="form-control" required aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="nome">
 		</div>
 		<div class="input-group input-group-sm mb-3">
 			<div class="input-goup-prepend">

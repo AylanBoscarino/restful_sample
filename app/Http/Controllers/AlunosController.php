@@ -36,7 +36,12 @@ class AlunosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $aluno = new Aluno;
+        $aluno->nome = $request->nome;
+        $aluno->email = $request->email;
+        $aluno->curso = $request->curso;
+        $aluno->save();    
+
     }
 
     /**
