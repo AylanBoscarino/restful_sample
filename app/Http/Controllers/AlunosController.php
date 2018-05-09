@@ -54,8 +54,9 @@ class AlunosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $aluno = Aluno::findOrFail($id);
+        return $aluno;
     }
 
     /**
@@ -78,7 +79,12 @@ class AlunosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+        $aluno->nome = $request->nome;
+        $aluno->email = $request->email;
+        $aluno->curso = $request->curso;
+        $aluno->save();
+        return $aluno;
     }
 
     /**

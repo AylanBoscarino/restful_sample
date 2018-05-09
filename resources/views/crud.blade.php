@@ -74,6 +74,9 @@
 		
 		</form>
 	</div>
+
+
+	<!-- Modal! -->
 	<div class="modal fade" id="editModal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -104,7 +107,7 @@
 						</div>
 						<input type="text" class="form-control" required aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="editCurso">
 						</div>
-						<button class="btn btn-primary " id="editSalvar">Salvar</button>
+						<a href="" class="btn btn-primary " id="editSalvar">Salvar</a>
 						</div>
 					</form>
 

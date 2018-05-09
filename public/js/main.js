@@ -33,7 +33,41 @@ $(function(){
 	});
 
 	$(document).on('click', '.editor', function(){
-		$('#editModal').modal('toggle');
+		var id = $(this).parents(".list-group-item").attr('data-id');
+		$.ajax({
+			headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    },
+		    url: "alunos/"+id,
+		    dataType:'JSON',
+		    success:function(aluno){
+			$('#editModal').modal('toggle');
+		    $('#editModal').attr('data-id', aluno.id);
+		    $('#editName').val(aluno.nome);
+		    $('#editEmail').val(aluno.email);
+		    $('#editCurso').val(aluno.curso);
+		    }
+		});
+	});	
+
+	$('#editSalvar').on('click', function(){
+		var aluno = {
+			nome: $("#editName").val(),
+			email: $("#editEmail").val(),
+			curso: $("#editCurso").val() 
+		};
+		$.ajax({
+			headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    },
+		    type: 'PUT',
+		    dataType:'JSON',
+		    url: "alunos/"+ $(this).parents("#editModal").attr('data-id'),
+		    data:aluno,
+		    success:function(aluno){
+		    	//alert(aluno);
+		    }
+		});
 	});
 	
 	$("#adiciona").on('click', function(){
