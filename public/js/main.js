@@ -6,7 +6,7 @@ $(function(){
 	var $curso = $("#curso");
 
 	var alunoTemplate ="" +
-		 "<li class='list-group-item'>"+
+		 "<li class='list-group-item' data-id='{{id}}'>"+
 					"<div class='row'>"+
 						"<div class='col'>"+
 							"{{nome}}"+
@@ -29,10 +29,25 @@ $(function(){
 		$alunos.append( jQuery(Mustache.render(alunoTemplate, aluno)));
 
 	}
+
+	function removeAluno(id, lista){
+		$.ajax({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+			},
+			type:'DELETE',	
+			url:'/alunos/'+id,
+			dataType:'JSON',
+			success:function(retorno){
+				$lista.remove();
+			}
+		});
+	}
 	
 	$(document).on('click', '.removedor', function(){
 		
-		$(this).parents(".list-group-item").remove();
+		$lista = $(this).parents(".list-group-item");
+		removeAluno($lista.attr('data-id'), $lista);
 	});
 	$(document).on('click', '.editor', function(){
 		$('#editModal').modal('toggle');
@@ -45,7 +60,7 @@ $(function(){
 
 		var aluno = {nome:$nome.val(), email:$email.val() ,curso:$curso.val()};
 		
-		addAluno(aluno);
+		
 
 		$.ajax({
 			headers: {
@@ -55,8 +70,8 @@ $(function(){
 			url: "/alunos",
 			data: aluno,// {_token: CSRF_TOKEN, message: aluno},
 			dataType: 'JSON',
-			succes: function(newAluno){
-				alert(newAluno);
+			success: function(newAluno){
+				addAluno(newAluno);
 			}
 		});
 		}

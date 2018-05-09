@@ -40,7 +40,8 @@ class AlunosController extends Controller
         $aluno->nome = $request->nome;
         $aluno->email = $request->email;
         $aluno->curso = $request->curso;
-        $aluno->save();    
+        $aluno->save();  
+        return $aluno->toJson();  
 
     }
 
@@ -86,6 +87,10 @@ class AlunosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+        $aluno->delete();
+        return $aluno;
+
+
     }
 }

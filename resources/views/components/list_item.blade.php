@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" data-id="{{$aluno->id}}">
 	<div class="row">
 		<div class="col">
 			{{$aluno->nome}}
