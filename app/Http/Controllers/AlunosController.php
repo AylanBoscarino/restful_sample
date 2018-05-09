@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Aluno;
+use Illuminate\Support\Facades\View;
 
 class AlunosController extends Controller
 {
@@ -41,8 +42,9 @@ class AlunosController extends Controller
         $aluno->email = $request->email;
         $aluno->curso = $request->curso;
         $aluno->save();  
-        return $aluno->toJson();  
-
+        //return $aluno->toJson();  
+        $html = View::make('components.list_item', [ 'aluno' =>$aluno])->render();
+        return response()->json($html);
     }
 
     /**

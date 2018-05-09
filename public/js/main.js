@@ -5,29 +5,14 @@ $(function(){
 	var $email = $("#email");
 	var $curso = $("#curso");
 
-	var alunoTemplate ="" +
-		 "<li class='list-group-item' data-id='{{id}}'>"+
-					"<div class='row'>"+
-						"<div class='col'>"+
-							"{{nome}}"+
-						"</div>"+
-						"<div class='col'>"+
-							"{{email}}"+
-						"</div>"+
-						"<div class='col'>"+
-							"{{curso}}"+
-						"</div>"+
-						"<div class='col'>"+
-							"<button type='button' class='btn btn-warning editor' title='editar'l'>E</button>"+
-							"<button class='btn btn-danger removedor' title='deletar'>X</button>"+
-						"</div>"+
-					"</div>"+
-				"</li>";
+	
 	
 	function addAluno(aluno){
+		//var alunoTemplate = View::make(aluno, )
+		//$alunos.append( jQuery(Mustache.render(alunoTemplate, aluno)));
+		//View::make('components.list_item', aluno)->render()
 		
-		$alunos.append( jQuery(Mustache.render(alunoTemplate, aluno)));
-
+		$alunos.append(aluno);
 	}
 
 	function removeAluno(id, lista){
