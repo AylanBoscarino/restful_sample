@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{asset('css/app.css')}}">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<meta charset="utf-8">
-	<title> php Restful API</title>
+	<title> Cadastro de Alunos</title>
 </head>
 <body>
 	
@@ -18,7 +18,7 @@
 		<div class="container">
 			
 		</div>
-		<h1>Lets do his</h1>
+		<h1>Alunos</h1>
 		<div>
 
 			<ul class="list-group" id="alunos" >
@@ -78,7 +78,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1>vai se fude</h1>
+					<h1>Tela de edição</h1>
 				</div>
 				 <div class="modal-body">
 					
